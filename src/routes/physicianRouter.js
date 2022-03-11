@@ -1,10 +1,13 @@
 const express = require('express')
 const physicianRouter = express.Router()
 const physicianController = require('../controllers/physicianController')
+const auth = require("../middlewares/auth");
 
-physicianRouter.get('/listAllPhysicians', physicianController.listAllPhysician)
-physicianRouter.post('/newPhysician', physicianController.newPhysician)
-physicianRouter.delete('/deletePhysician/:id', physicianController.deletePhysician)
-physicianRouter.put('/updatePhysician/', physicianController.updatePhysician)
+
+physicianRouter.post('/authentication',physicianController.authentication)
+physicianRouter.get('/listAllPhysicians',auth, physicianController.listAllPhysician)
+physicianRouter.post('/newPhysician',auth, physicianController.newPhysician)
+physicianRouter.delete('/deletePhysician/:id',auth, physicianController.deletePhysician)
+physicianRouter.put('/updatePhysician/',auth, physicianController.updatePhysician)
 
 module.exports = physicianRouter
